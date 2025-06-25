@@ -21,61 +21,69 @@ import {
   UserCheck,
   Award
 } from "lucide-react";
+import { useApp } from "@/contexts/AppContext";
 
 const menuItems = [
   {
     title: "Dashboard",
-    url: "#",
+    view: "dashboard" as const,
     icon: Home,
   },
   {
     title: "Estudiantes",
-    url: "#",
+    view: "students" as const,
     icon: Users,
   },
   {
     title: "Profesores",
-    url: "#",
+    view: "teachers" as const,
     icon: UserCheck,
   },
   {
     title: "Materias",
-    url: "#",
+    view: "subjects" as const,
     icon: BookOpen,
   },
   {
     title: "Calificaciones",
-    url: "#",
+    view: "grades" as const,
     icon: Award,
   },
   {
     title: "Calendario",
-    url: "#",
+    view: "calendar" as const,
     icon: Calendar,
   },
   {
     title: "Asistencia",
-    url: "#",
+    view: "attendance" as const,
     icon: ClipboardList,
   },
   {
     title: "Reportes",
-    url: "#",
+    view: "reports" as const,
     icon: BarChart3,
   },
   {
     title: "Comunicación",
-    url: "#",
+    view: "communication" as const,
     icon: MessageSquare,
   },
   {
     title: "Configuración",
-    url: "#",
+    view: "settings" as const,
     icon: Settings,
   },
 ];
 
 export function AcademicSidebar() {
+  const { currentView, setCurrentView } = useApp();
+
+  const handleNavigation = (view: any) => {
+    setCurrentView(view);
+    console.log(`Navegando a: ${view}`);
+  };
+
   return (
     <Sidebar className="border-r border-gray-200">
       <SidebarContent className="bg-primary text-white">
@@ -89,12 +97,17 @@ export function AcademicSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild 
-                    className="text-white hover:bg-white/10 data-[state=open]:bg-white/10"
+                    className={`text-white hover:bg-white/10 data-[state=open]:bg-white/10 cursor-pointer ${
+                      currentView === item.view ? 'bg-white/20' : ''
+                    }`}
                   >
-                    <a href={item.url} className="flex items-center space-x-3 px-3 py-2">
+                    <button 
+                      onClick={() => handleNavigation(item.view)}
+                      className="flex items-center space-x-3 px-3 py-2 w-full text-left"
+                    >
                       <item.icon className="w-5 h-5" />
                       <span>{item.title}</span>
-                    </a>
+                    </button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

@@ -1,9 +1,10 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserCheck, Mail, Phone, BookOpen, Users, Calendar, Plus, MessageSquare } from "lucide-react";
+import { useApp } from "@/contexts/AppContext";
+import { toast } from "@/hooks/use-toast";
 
 const mockTeachers = [
   {
@@ -57,6 +58,8 @@ const mockTeachers = [
 ];
 
 const TeacherPanel = () => {
+  const { setShowNewTeacherModal } = useApp();
+
   const getInitials = (nombre: string) => {
     return nombre.split(' ').map(n => n[0]).join('').toUpperCase();
   };
@@ -70,6 +73,22 @@ const TeacherPanel = () => {
     return variants[estado] || "outline";
   };
 
+  const handleMessage = (teacher: any) => {
+    toast({
+      title: "Mensaje enviado",
+      description: `Mensaje enviado a ${teacher.nombre}`,
+    });
+    console.log('Enviar mensaje a:', teacher);
+  };
+
+  const handleCall = (teacher: any) => {
+    toast({
+      title: "Llamada iniciada",
+      description: `Llamando a ${teacher.nombre} - ${teacher.telefono}`,
+    });
+    console.log('Llamar a:', teacher);
+  };
+
   return (
     <div className="space-y-6">
       <Card className="academic-card">
@@ -79,7 +98,10 @@ const TeacherPanel = () => {
               <UserCheck className="w-5 h-5" />
               Gestión de Profesores
             </CardTitle>
-            <Button className="bg-primary hover:bg-primary/90">
+            <Button 
+              className="bg-primary hover:bg-primary/90"
+              onClick={() => setShowNewTeacherModal(true)}
+            >
               <Plus className="w-4 h-4 mr-2" />
               Nuevo Profesor
             </Button>
@@ -135,10 +157,20 @@ const TeacherPanel = () => {
                           <span className="truncate">{teacher.email}</span>
                         </div>
                         <div className="flex space-x-1">
-                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-8 w-8 p-0"
+                            onClick={() => handleMessage(teacher)}
+                          >
                             <MessageSquare className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="h-8 w-8 p-0"
+                            onClick={() => handleCall(teacher)}
+                          >
                             <Phone className="w-4 h-4" />
                           </Button>
                         </div>

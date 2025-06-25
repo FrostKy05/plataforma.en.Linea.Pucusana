@@ -1,10 +1,11 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, Eye, Edit, Trash2, Plus } from "lucide-react";
 import { useState } from "react";
+import { useApp } from "@/contexts/AppContext";
+import { toast } from "@/hooks/use-toast";
 
 const mockStudents = [
   {
@@ -61,6 +62,7 @@ const mockStudents = [
 
 const StudentTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { setShowNewStudentModal, setSelectedStudent } = useApp();
   
   const filteredStudents = mockStudents.filter(student =>
     student.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -83,6 +85,32 @@ const StudentTable = () => {
     return "text-red-600 font-semibold";
   };
 
+  const handleViewStudent = (student: any) => {
+    setSelectedStudent(student);
+    toast({
+      title: "Estudiante seleccionado",
+      description: `Viendo perfil de ${student.nombre}`,
+    });
+    console.log('Ver estudiante:', student);
+  };
+
+  const handleEditStudent = (student: any) => {
+    toast({
+      title: "Editar estudiante",
+      description: `Editando información de ${student.nombre}`,
+    });
+    console.log('Editar estudiante:', student);
+  };
+
+  const handleDeleteStudent = (student: any) => {
+    toast({
+      title: "Eliminar estudiante",
+      description: `${student.nombre} ha sido eliminado`,
+      variant: "destructive",
+    });
+    console.log('Eliminar estudiante:', student);
+  };
+
   return (
     <Card className="academic-card">
       <CardHeader>
@@ -91,7 +119,10 @@ const StudentTable = () => {
             <Eye className="w-5 h-5" />
             Gestión de Estudiantes
           </CardTitle>
-          <Button className="bg-primary hover:bg-primary/90">
+          <Button 
+            className="bg-primary hover:bg-primary/90"
+            onClick={() => setShowNewStudentModal(true)}
+          >
             <Plus className="w-4 h-4 mr-2" />
             Nuevo Estudiante
           </Button>
@@ -158,13 +189,26 @@ const StudentTable = () => {
                   </td>
                   <td className="p-3">
                     <div className="flex justify-center space-x-2">
-                      <Button variant="ghost" size="sm">
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => handleViewStudent(student)}
+                      >
                         <Eye className="w-4 h-4" />
                       </Button>
-                      <Button variant="ghost" size="sm">
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => handleEditStudent(student)}
+                      >
                         <Edit className="w-4 h-4" />
                       </Button>
-                      <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="text-red-600 hover:text-red-700"
+                        onClick={() => handleDeleteStudent(student)}
+                      >
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
