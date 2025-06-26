@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ClipboardList, Users, Calendar, CheckCircle, XCircle } from "lucide-react";
+import { ClipboardList, Users, Calendar, CheckCircle, XCircle, Clock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const mockAttendance = [
