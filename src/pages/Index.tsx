@@ -1,4 +1,3 @@
-
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AcademicSidebar } from "@/components/AcademicSidebar";
 import AcademicHeader from "@/components/AcademicHeader";
@@ -9,6 +8,11 @@ import CalendarWidget from "@/components/CalendarWidget";
 import TeacherPanel from "@/components/TeacherPanel";
 import NewStudentModal from "@/components/NewStudentModal";
 import NewTeacherModal from "@/components/NewTeacherModal";
+import SubjectsPanel from "@/components/SubjectsPanel";
+import AttendancePanel from "@/components/AttendancePanel";
+import ReportsPanel from "@/components/ReportsPanel";
+import CommunicationPanel from "@/components/CommunicationPanel";
+import SettingsPanel from "@/components/SettingsPanel";
 import { AppProvider, useApp } from "@/contexts/AppContext";
 import { Users, GraduationCap, BookOpen, Award, TrendingUp } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
@@ -63,6 +67,13 @@ const DashboardContent = () => {
             <TeacherPanel />
           </div>
         );
+      case 'subjects':
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-gray-900">Gestión de Materias</h2>
+            <SubjectsPanel />
+          </div>
+        );
       case 'grades':
         return (
           <div className="space-y-6">
@@ -79,7 +90,7 @@ const DashboardContent = () => {
               <div className="academic-card p-6">
                 <h3 className="text-lg font-semibold mb-4">Próximos Eventos</h3>
                 <div className="space-y-4">
-                  <div className="border-l-4 border-blue-500 pl-4">
+                  <div className="border-l-4 border-primary pl-4">
                     <p className="font-medium">Reunión de Padres</p>
                     <p className="text-sm text-gray-600">15 de Febrero, 18:00</p>
                   </div>
@@ -96,6 +107,34 @@ const DashboardContent = () => {
             </div>
           </div>
         );
+      case 'attendance':
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-gray-900">Control de Asistencia</h2>
+            <AttendancePanel />
+          </div>
+        );
+      case 'reports':
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-gray-900">Centro de Reportes</h2>
+            <ReportsPanel />
+          </div>
+        );
+      case 'communication':
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-gray-900">Centro de Comunicación</h2>
+            <CommunicationPanel />
+          </div>
+        );
+      case 'settings':
+        return (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-gray-900">Configuración del Sistema</h2>
+            <SettingsPanel />
+          </div>
+        );
       default:
         return (
           <>
@@ -103,7 +142,7 @@ const DashboardContent = () => {
             <div className="mb-8">
               <div className="academic-gradient text-white rounded-lg p-6">
                 <h1 className="text-3xl font-bold mb-2">Bienvenido al Sistema de Gestión Académica</h1>
-                <p className="text-blue-100">Instituto de Educación Secundaria "San Miguel" - Curso 2023/2024</p>
+                <p className="text-green-100">Instituto de Educación Secundaria "Manuel F. Calvo y Pérez" - Pucusana</p>
                 <div className="mt-4 flex items-center space-x-4 text-sm">
                   <span className="bg-white/20 px-3 py-1 rounded-full">📚 Trimestre Actual: 2°</span>
                   <span className="bg-white/20 px-3 py-1 rounded-full">📅 Período: Enero 2024</span>
@@ -119,7 +158,7 @@ const DashboardContent = () => {
                 value={342}
                 change="+5.2%"
                 icon={Users}
-                color="bg-blue-500"
+                color="bg-green-600"
               />
               <StatsCard
                 title="Profesores Activos"
@@ -132,14 +171,14 @@ const DashboardContent = () => {
                 title="Materias Impartidas"
                 value={15}
                 icon={BookOpen}
-                color="bg-purple-500"
+                color="bg-green-700"
               />
               <StatsCard
                 title="Promedio General"
                 value="8.2"
                 change="+0.3"
                 icon={Award}
-                color="bg-orange-500"
+                color="bg-green-800"
               />
             </div>
 
@@ -191,7 +230,7 @@ const DashboardContent = () => {
                   onClick={() => handleQuickAction('nuevo-estudiante')}
                   className="p-4 text-center border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <Users className="w-8 h-8 mx-auto mb-2 text-blue-500" />
+                  <Users className="w-8 h-8 mx-auto mb-2 text-green-600" />
                   <span className="text-sm font-medium">Nuevo Estudiante</span>
                 </button>
                 <button 
@@ -205,14 +244,14 @@ const DashboardContent = () => {
                   onClick={() => handleQuickAction('nueva-materia')}
                   className="p-4 text-center border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <BookOpen className="w-8 h-8 mx-auto mb-2 text-purple-500" />
+                  <BookOpen className="w-8 h-8 mx-auto mb-2 text-green-700" />
                   <span className="text-sm font-medium">Nueva Materia</span>
                 </button>
                 <button 
                   onClick={() => handleQuickAction('reportes')}
                   className="p-4 text-center border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  <GraduationCap className="w-8 h-8 mx-auto mb-2 text-orange-500" />
+                  <GraduationCap className="w-8 h-8 mx-auto mb-2 text-green-800" />
                   <span className="text-sm font-medium">Reportes</span>
                 </button>
               </div>

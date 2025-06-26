@@ -13,8 +13,8 @@ const AcademicHeader = () => {
               <GraduationCap className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">AcademeHub</h1>
-              <p className="text-sm text-gray-500">Gestión Académica Integral</p>
+              <h1 className="text-xl font-bold text-gray-900">SGA - Manuel F. Calvo y Pérez</h1>
+              <p className="text-sm text-gray-500">Gestión Académica Integral - Pucusana</p>
             </div>
           </div>
         </div>

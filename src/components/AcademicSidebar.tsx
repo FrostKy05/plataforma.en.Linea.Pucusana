@@ -89,7 +89,7 @@ export function AcademicSidebar() {
       <SidebarContent className="bg-primary text-white">
         <SidebarGroup>
           <SidebarGroupLabel className="text-white/80 text-sm font-medium px-3 py-2">
-            Gestión Académica
+            Manuel F. Calvo y Pérez - Pucusana
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

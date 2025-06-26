@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-export type ViewType = 'dashboard' | 'students' | 'teachers' | 'grades' | 'calendar' | 'reports' | 'settings';
+export type ViewType = 'dashboard' | 'students' | 'teachers' | 'subjects' | 'grades' | 'calendar' | 'attendance' | 'reports' | 'communication' | 'settings';
 
 interface AppContextType {
   currentView: ViewType;
